@@ -46,8 +46,10 @@
 		</section>
 	</div>
 	<section class="section full-width page-title-slice" style="background-color:#ccc;color:#444444">
-		<form method="post" action="/fileUpload">
+		<form method="post" id='fm' action="/fileUpload" enctype="multipart/form-data">
 			<input type="file" name='file'/>
+			<input type="file" name='file2'/>
+			<input type="text" name='smthing'/>
 			<input type="submit" />
 		</form>
 	</section>
@@ -359,6 +361,22 @@ publishing.</p>
 			</video>
 		</div>
 	</div>	
-	<script src="U-Experience%20Platform%20_%20Mobile%20Platforms%20_%20Usablenet_files/jquery.js"></script>	
+	<script src="/js/jquery-1.11.0.js"></script>
+	<script>
+	$("#fm").submit(function(e){
+		$.ajax({
+		    url: '/fileUpload',
+		    data: new FormData($("#fm")[0]),
+		    cache: false,
+		    contentType: false,
+		    processData: false,
+		    type: 'POST',
+		    success: function(data){
+		        alert(data);
+		    }
+		});
+		e.preventDefault();		
+	});
+	</script>	
 </body>
 </html>
